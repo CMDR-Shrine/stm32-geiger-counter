@@ -112,11 +112,25 @@ int main(void){
 
 
         /* ok now we are flashing but i want to instead read input from a pin */
-        /* I beleive the signal is digital so we need to mess with a digital pin */
-        /* we must turn it on*/
-        /*we will poll it for signal */
-        /* 4.747v from my bm245 */
-        /* drops by 600 mv for 700micro secconds too fast for my multimeter */
+        /* geiger signal is digital so we need to mess with a digital pin */
+
+        /* PB10: Port B, Pin 10: as per table 5 in datasheet:
+         * its IO and FT = 5v tolerant pg 33
+         *  Refrence manual:
+         *  Port b addr = 0x4001 0C00 - 0x4001 0FFF GPIO Port B
+         *
+         *  (table 9 must be set to floating see table 20 bit = 0100         
+         *
+        */
+
+        /*
+         * for future!!
+         * GPIO sec of ref manual: GPIOx_BSRR & GPIOx_BRR registers = allow atomic read/modify accesses to any of
+         * the GPIO registers
+         * means: write 1 value, to theshadow register, no need to read it
+         * no read, no  write-back, one atomic write. just 1<<13u for example
+        */
+
 
         
 
