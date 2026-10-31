@@ -119,9 +119,11 @@ int main(void){
          *  Refrence manual:
          *  Port b addr = 0x4001 0C00 - 0x4001 0FFF GPIO Port B
          *
-         *  (table 9 must be set to floating see table 20 bit = 0100         
-         *
-        */
+         *  (table 9 must be set to floating see table 20: bit = 0100
+         * we configure gpio via Configuration registers (there are 2)
+         * GPIOB_CRH is 0x04 offset from root B addr
+         * offset 8 [nibble] = PB10
+        */ 
 
         /*
          * for future!!
@@ -130,6 +132,15 @@ int main(void){
          * means: write 1 value, to theshadow register, no need to read it
          * no read, no  write-back, one atomic write. just 1<<13u for example
         */
+
+        uint32_t START_PORT_B = 0x40010C00;
+        uint32_t GPIOB_CRH = START_PORT_B + 0x04;
+        // We cast from int to pointer = mem addr now!
+        volatile uint32_t *PB10_config_reg = (volatile uint32_t *) GPIOB_CRH;
+        *PB10_config_reg = replace_nibble(*PB10_config_reg,8u,4u);
+
+
+        /* the data register for pin 10: 9.2.3 = GPIOB_IDR
 
 
         
