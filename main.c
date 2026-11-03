@@ -123,10 +123,8 @@ int main(void){
          * we configure gpio via Configuration registers (there are 2)
          * GPIOB_CRH is 0x04 offset from root B addr
          * offset 8 [nibble] = PB10
-        */ 
-
-        /*
-         * for future!!
+         *
+         * ### for future!! ###
          * GPIO sec of ref manual: GPIOx_BSRR & GPIOx_BRR registers = allow atomic read/modify accesses to any of
          * the GPIO registers
          * means: write 1 value, to theshadow register, no need to read it
@@ -138,15 +136,15 @@ int main(void){
         // We cast from int to pointer = mem addr now!
         volatile uint32_t *PB10_config_reg = (volatile uint32_t *) GPIOB_CRH;
         *PB10_config_reg = replace_nibble(*PB10_config_reg,8u,4u);
+        /* the read data register for pin 10: 9.2.3 = GPIOB_IDR */
+
+        /* seems its offset 0x08h as per 9.2.3 */
+        uint32_t GPIOB_IDR = START_PORT_B + 0x08h;
+        volatile unit32_t *PB10_IDR_reg = (volatile uin32_t *);
+        *PB10_IDR_reg = set_bit(*PB10_IDR_reg,
+            
 
 
-        /* the data register for pin 10: 9.2.3 = GPIOB_IDR
 
-
-        
-
-
-
-        
     }
 }
