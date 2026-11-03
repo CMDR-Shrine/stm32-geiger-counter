@@ -139,9 +139,9 @@ int main(void){
         /* the read data register for pin 10: 9.2.3 = GPIOB_IDR */
 
         /* seems its offset 0x08h as per 9.2.3 */
-        uint32_t GPIOB_IDR = START_PORT_B + 0x08h;
-        volatile unit32_t *PB10_IDR_reg = (volatile uin32_t *);
-        *PB10_IDR_reg = set_bit(*PB10_IDR_reg,
+        uint32_t GPIOB_IDR = START_PORT_B + 0x08;
+        volatile uint32_t *PB10_IDR_reg = (volatile uint32_t *) GPIOB_IDR;
+        *PB10_IDR_reg = set_bit(*PB10_IDR_reg, <input thingy>);
             
 
 
